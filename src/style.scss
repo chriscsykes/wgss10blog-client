@@ -1,17 +1,23 @@
 body, html {
     font-family: "Roboto", sans-serif;
-    background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
+    background: white;
     height: 100%;
 }
 
-.logo {
-  // background-image: url('img/MYIMAGE.jpg');
-  width: 100px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
+h1 {
+  color: black;
 }
 
-.active {
-  color: pink;
+.all-posts-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.navBar {
+  height: 100px;
+}
+
+.input-box {
+  width: 100%;
 }
