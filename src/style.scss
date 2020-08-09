@@ -1,23 +1,104 @@
 body, html {
     font-family: "Roboto", sans-serif;
-    background: white;
     height: 100%;
 }
 
-h1 {
-  color: black;
+.web-body {
+  background-color: #eeeeee;
+  min-height: 100vh;
 }
 
 .all-posts-display {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .navBar {
-  height: 100px;
+  height: 80px;
+}
+ 
+.website-title {
+  font-size: 30px;
+}
+
+.posts-title {
+  margin-top: 25px;
+  margin-left: 100px;
+}
+
+.bootstrap-card {
+  margin: 20px;
+}
+
+.card-body {
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  color: #1a1a1a;
+}
+
+.card-text {
+  color: #1a1a1a;
+}
+
+.back-button {
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  color: #8b8888;
+}
+
+.create-title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.note-container {
+  margin-top: 40px;
+  padding-bottom: 35px;
+  padding-left: 30px !important;
+  border-right: 10px;
+  border-left: 10px;
+  background-color: #ffffff;
+}
+
+.post-buttons {
+  margin-top: 35px;
+  margin-bottom: 40px;
+  margin-right: 20px;
+}
+
+.post-buttons:hover {
+  color: #8b8888;
+}
+
+.new-post-button {
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.new-post-button:hover {
+  color: #8b8888;
 }
 
 .input-box {
   width: 100%;
+  border: 1px solid #ced4da
+}
+
+.title {
+ font-weight: bold;
+}
+
+.tags {
+  color: #8b8888;
+}
+
+.navbar-brand {
+  font-size: 2rem !important;
 }

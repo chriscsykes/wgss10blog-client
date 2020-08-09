@@ -2,10 +2,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  InputGroup, FormControl, Container, Row, Col, Button,
+  InputGroup, FormControl, Container, Row, Col,
 } from 'react-bootstrap';
 import TextareaAutosize from 'react-textarea-autosize';
 import marked from 'marked';
+import {
+  FaSave, FaTrashAlt, FaArrowAltCircleLeft, FaEdit,
+} from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 import { fetchPost, updatePost, deletePost } from '../actions';
 
 class Post extends Component {
@@ -41,6 +45,10 @@ class Post extends Component {
     this.props.deletePost(this.props.match.params.postID, this.props.history);
   }
 
+  onBack = () => {
+    this.props.history.push('/');
+  }
+
   onTitleChange = (event) => {
     this.setState({ title: event.target.value });
   }
@@ -67,22 +75,25 @@ class Post extends Component {
     });
   }
 
-  // render based on whether is currently editing or not
+  // bootstrap input for title, tags, and coverUrl from: https://react-bootstrap.github.io/components/input-group/\
   renderTitle = () => {
     if (this.state.isEditing) {
       return (
-        <InputGroup id="title" className="mb-3">
-          <FormControl
-            onChange={this.onTitleChange}
-            value={this.state.title}
-            aria-label="Title"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
+        <div>
+          <h4>Title</h4>
+          <InputGroup id="title" className="mb-3">
+            <FormControl
+              onChange={this.onTitleChange}
+              value={this.state.title}
+              aria-label="Title"
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+        </div>
       );
     } else {
       return (
-        <h1>
+        <h1 className="title">
           {this.props.currentPost.title}
         </h1>
       );
@@ -92,20 +103,23 @@ class Post extends Component {
   renderTags = () => {
     if (this.state.isEditing) {
       return (
-        <InputGroup id="tags" className="mb-3">
-          <FormControl
-            onChange={this.onTagsChange}
-            value={this.state.tags}
-            aria-label="Tags"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
+        <div>
+          <h4>Tags</h4>
+          <InputGroup id="tags" className="mb-3">
+            <FormControl
+              onChange={this.onTagsChange}
+              value={this.state.tags}
+              aria-label="Tags"
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+        </div>
       );
     } else {
       return (
-        <h1>
+        <h5 className="tags">
           {this.props.currentPost.tags}
-        </h1>
+        </h5>
       );
     }
   }
@@ -113,18 +127,19 @@ class Post extends Component {
   renderContent = () => {
     if (this.state.isEditing) {
       return (
-        <TextareaAutosize className="input-box"
-          placeholder="(Markdown supported)"
-          value={this.state.content}
-          onChange={this.onContentChange}
-          minRows={8}
-        />
+        <div>
+          <h4>Content</h4>
+          <TextareaAutosize className="input-box"
+            placeholder="(Markdown supported)"
+            value={this.state.content}
+            onChange={this.onContentChange}
+            minRows={8}
+          />
+        </div>
       );
     } else {
       return (
-        <h1>
-          <div id="content" dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.content || '') }} />
-        </h1>
+        <p id="content" dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.content || '') }} />
       );
     }
   }
@@ -132,14 +147,17 @@ class Post extends Component {
   renderCoverUrl = () => {
     if (this.state.isEditing) {
       return (
-        <InputGroup id="coverUrl" className="mb-3">
-          <FormControl
-            onChange={this.onUrlChange}
-            value={this.state.coverUrl}
-            aria-label="coverUrl"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
+        <div>
+          <h4>Cover Image URL</h4>
+          <InputGroup id="coverUrl" className="mb-3">
+            <FormControl
+              onChange={this.onUrlChange}
+              value={this.state.coverUrl}
+              aria-label="coverUrl"
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+        </div>
       );
     } else {
       return (
@@ -149,35 +167,46 @@ class Post extends Component {
     }
   }
 
-  renderDeleteButton = () => {
-    return (
-      <Button variant="primary" onClick={this.onDelete}>Delete</Button>
-    );
-  }
-
-  renderSaveEditButton = () => {
+  // code to make icons bigger using IconContext adapted from: https://github.com/react-icons/react-icons
+  renderButtons = () => {
     if (this.state.isEditing) {
       return (
-        <Button variant="primary" onClick={this.onUpdate}>Save</Button>
+        <div>
+          <IconContext.Provider value={{ size: '1.5em' }}>
+            <FaArrowAltCircleLeft className="post-buttons" onClick={this.onBack} />
+            <FaTrashAlt className="post-buttons" onClick={this.onDelete} />
+            <FaSave className="post-buttons" onClick={this.onUpdate} />
+          </IconContext.Provider>
+        </div>
       );
     } else {
       return (
-        <Button variant="primary" onClick={this.toggleIsEditing}>Edit</Button>
+        <div>
+          <IconContext.Provider value={{ size: '1.5em' }}>
+            <FaArrowAltCircleLeft className="post-buttons" onClick={this.onBack} />
+            <FaTrashAlt className="post-buttons" onClick={this.onDelete} />
+            <FaEdit className="post-buttons" onClick={this.toggleIsEditing} />
+          </IconContext.Provider>
+        </div>
       );
     }
   }
 
   render() {
     return (
-      <Container>
+      <Container className="note-container">
+        <Row>
+          <Col>
+            {this.renderButtons()}
+
+          </Col>
+        </Row>
         <Row>
           <Col>
             {this.renderTitle()}
             {this.renderTags()}
             {this.renderContent()}
             {this.renderCoverUrl()}
-            {this.renderDeleteButton()}
-            {this.renderSaveEditButton()}
           </Col>
         </Row>
       </Container>

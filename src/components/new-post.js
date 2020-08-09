@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  InputGroup, FormControl, Container, Row, Col, Button,
+  InputGroup, FormControl, Container, Row, Col,
 } from 'react-bootstrap';
 import TextareaAutosize from 'react-textarea-autosize';
+import { FaSave, FaTrashAlt, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 import { createPost } from '../actions';
 
 class NewPost extends Component {
@@ -35,12 +37,17 @@ class NewPost extends Component {
     this.setState({ coverUrl: event.target.value });
   }
 
-  createPost = () => {
+  onSave = () => {
     this.props.createPost({ ...this.state }, this.props.history);
   }
 
+  onDelete = () => {
+    this.props.history.push('/');
+  }
+
   // bootstrap form for content adapted from: https://react-bootstrap.github.io/components/forms/
-  // bootstrap input for title, tags, and coverUrl from: https://react-bootstrap.github.io/components/input-group/
+  // bootstrap input for title, tags, and coverUrl from: https://react-bootstrap.github.io/components/input-group/\
+  // code to make icons bigger using IconContext adapted from: https://github.com/react-icons/react-icons
   // used same TextareaAutosize as I did in Lab 3
   renderNewPost() {
     return (
@@ -71,7 +78,10 @@ class NewPost extends Component {
               aria-label="coverUrl"
             />
           </InputGroup>
-          <Button variant="primary" onClick={this.createPost}>Create</Button>{' '}
+          <IconContext.Provider value={{ size: '1.5em' }}>
+            <FaTrashAlt className="new-post-button" onClick={this.onDelete} />
+            <FaSave className="new-post-button" onClick={this.onSave} />
+          </IconContext.Provider>
         </Col>
       </Row>
     );
@@ -81,7 +91,10 @@ class NewPost extends Component {
     console.log('newpost');
     return (
       <Container>
-        <h1>Create A New Post</h1>
+        <IconContext.Provider value={{ size: '1.5em' }}>
+          <FaArrowAltCircleLeft className="back-button" onClick={this.onDelete} />
+        </IconContext.Provider>
+        <h2 className="create-title">Create A New Post</h2>
         {this.renderNewPost()}
       </Container>
     );
