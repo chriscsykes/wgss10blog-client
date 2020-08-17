@@ -37,7 +37,6 @@ class SignUp extends Component {
 
       event.preventDefault();
       this.props.signupUser(this.state, this.props.history);
-      console.log(this.state.email);
     }
 
     onBack = () => {
