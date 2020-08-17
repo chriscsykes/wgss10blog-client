@@ -29,9 +29,8 @@ class Posts extends Component {
                       <Card.Body className="card-body">
                         <Card.Img variant="top" src={post.coverUrl} id="cover-image" />
                         <Card.Title className="card-title">{post.title}</Card.Title>
-                        <Card.Text>
-                          {post.tags}
-                        </Card.Text>
+                        <Card.Text>{post.tags}</Card.Text>
+                        {/* <Card.Text>By {post.username}</Card.Text> */}
                       </Card.Body>
                     </Card>
                   </NavLink>

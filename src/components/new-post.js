@@ -18,6 +18,7 @@ class NewPost extends Component {
       content: '',
       tags: '',
       coverUrl: '',
+      authorName: '',
     };
   }
 
@@ -38,7 +39,7 @@ class NewPost extends Component {
   }
 
   onSave = () => {
-    this.props.createPost({ ...this.state }, this.props.history);
+    this.props.createPost({ ...this.state, authorName: this.props.username }, this.props.history);
   }
 
   onDelete = () => {
@@ -101,4 +102,9 @@ class NewPost extends Component {
   }
 }
 
-export default withRouter(connect(null, { createPost })(NewPost));
+function mapStateToProps(reduxState) {
+  return {
+    username: reduxState.auth.username,
+  };
+}
+export default withRouter(connect(mapStateToProps, { createPost })(NewPost));

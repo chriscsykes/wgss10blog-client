@@ -92,12 +92,19 @@ class Post extends Component {
         </div>
       );
     } else {
+      console.log(this.props.username);
       return (
         <h1 className="title">
           {this.props.currentPost.title}
         </h1>
       );
     }
+  }
+
+  renderAuthor = () => {
+    return (
+      <h5>Posted By: {this.props.currentPost.authorName}</h5>
+    );
   }
 
   renderTags = () => {
@@ -198,12 +205,12 @@ class Post extends Component {
         <Row>
           <Col>
             {this.renderButtons()}
-
           </Col>
         </Row>
         <Row>
           <Col>
             {this.renderTitle()}
+            {this.renderAuthor()}
             {this.renderTags()}
             {this.renderContent()}
             {this.renderCoverUrl()}
