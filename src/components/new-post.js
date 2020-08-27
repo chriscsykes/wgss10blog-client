@@ -18,6 +18,7 @@ class NewPost extends Component {
       title: '',
       content: '',
       tags: '',
+      imageURL: '',
       coverUrl: '',
       authorName: '',
     };
@@ -50,11 +51,13 @@ class NewPost extends Component {
 
   onSave = () => {
     if (this.state.file) {
+      console.log('hello');
       uploadImage(this.state.file).then((url) => {
         // use url for content_url and
         // either run your createPost actionCreator
         // or your updatePost actionCreator
-        console.log(url);
+        // console.log(url);
+        this.setState({ imageURL: url });
         this.props.createPost({ ...this.state, authorName: this.props.username }, this.props.history);
       }).catch((error) => {
         // handle error
@@ -87,9 +90,12 @@ class NewPost extends Component {
               aria-label="Tags"
             />
           </InputGroup>
+
           <h4>Upload Image</h4>
-          <img id="preview" alt="preview" src={this.state.preview} />
-          <input type="file" name="coverImage" onChange={this.onImageUpload} />
+          <InputGroup id="coverUrl" className="mb-3" onChange={this.onImageUpload} value={this.state.imageURL}>
+            <img id="preview" alt="preview" src={this.state.preview} />
+            <input type="file" name="coverImage" />
+          </InputGroup>
 
           <h4>Content</h4>
           <TextareaAutosize className="input-box"

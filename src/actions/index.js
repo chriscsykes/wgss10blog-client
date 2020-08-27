@@ -29,7 +29,7 @@ export function fetchPosts() {
 export function createPost(post, history) {
   return (dispatch) => {
     const fields = {
-      title: post.title, content: post.content, tags: post.tags, coverUrl: post.coverUrl, authorName: post.authorName,
+      title: post.title, content: post.content, tags: post.tags, imageURL: post.imageURL, coverUrl: post.coverUrl, authorName: post.authorName,
     };
     console.log(post.author);
     axios.post(`${ROOT_URL}/posts`, fields, { headers: { authorization: localStorage.getItem('token') } })

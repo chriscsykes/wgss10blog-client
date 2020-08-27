@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { fetchPost, updatePost, deletePost } from '../actions';
+import uploadImage from '../actions/s3';
 
 class Post extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Post extends Component {
       title: '',
       content: '',
       tags: '',
+      imageURL: '',
       coverUrl: '',
       isEditing: false,
     };
@@ -30,15 +32,43 @@ class Post extends Component {
     console.log('fetched!');
   }
 
+  onImageUpload = (event) => {
+    const file = event.target.files[0];
+    // Handle null file
+    // Get url of the file and set it to the src of preview
+    if (file) {
+      this.setState({ preview: window.URL.createObjectURL(file), file });
+    }
+  }
+
   onUpdate = () => {
-    this.setState({ isEditing: false });
-    const post = {
-      title: this.state.title,
-      tags: this.state.tags,
-      content: this.state.content,
-      coverUrl: this.state.coverUrl,
-    };
-    this.props.updatePost(this.props.match.params.postID, post);
+    if (this.state.file) {
+      uploadImage(this.state.file).then((url) => {
+        this.setState({ isEditing: false });
+        this.setState({ imageURL: url });
+        const post = {
+          title: this.state.title,
+          tags: this.state.tags,
+          content: this.state.content,
+          imageURL: this.state.imageURL,
+          coverUrl: this.state.coverUrl,
+        };
+        this.props.updatePost(this.props.match.params.postID, post);
+      }).catch((error) => {
+        // handle error
+        console.log(error);
+      });
+    } else {
+      this.setState({ isEditing: false });
+      const post = {
+        title: this.state.title,
+        tags: this.state.tags,
+        content: this.state.content,
+        imageURL: this.state.imageURL,
+        coverUrl: this.state.coverUrl,
+      };
+      this.props.updatePost(this.props.match.params.postID, post);
+    }
   }
 
   onDelete = () => {
@@ -130,6 +160,24 @@ class Post extends Component {
     }
   }
 
+  renderImageURL = () => {
+    if (this.state.isEditing) {
+      return (
+        <div>
+          <h4>Upload Image</h4>
+          <img id="preview" alt="preview" src={this.state.preview} />
+          <input type="file" name="coverImage" value={this.state.imageURL} onChange={this.onImageUpload} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <img id="imageURL" alt="imgURL" src={this.props.currentPost.imageURL} />
+        </div>
+      );
+    }
+  }
+
   renderContent = () => {
     if (this.state.isEditing) {
       return (
@@ -211,6 +259,7 @@ class Post extends Component {
             {this.renderTitle()}
             {this.renderAuthor()}
             {this.renderTags()}
+            {this.renderImageURL()}
             {this.renderContent()}
             {this.renderCoverUrl()}
           </Col>
