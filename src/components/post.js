@@ -92,7 +92,6 @@ class Post extends Component {
         </div>
       );
     } else {
-      console.log(this.props.username);
       return (
         <h1 className="title">
           {this.props.currentPost.title}

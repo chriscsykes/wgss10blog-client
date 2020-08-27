@@ -8,6 +8,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { FaSave, FaTrashAlt, FaArrowAltCircleLeft } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { createPost } from '../actions';
+import uploadImage from '../actions/s3';
 
 class NewPost extends Component {
   constructor(props) {
@@ -20,6 +21,15 @@ class NewPost extends Component {
       coverUrl: '',
       authorName: '',
     };
+  }
+
+  onImageUpload = (event) => {
+    const file = event.target.files[0];
+    // Handle null file
+    // Get url of the file and set it to the src of preview
+    if (file) {
+      this.setState({ preview: window.URL.createObjectURL(file), file });
+    }
   }
 
   onTitleChange = (event) => {
@@ -39,7 +49,18 @@ class NewPost extends Component {
   }
 
   onSave = () => {
-    this.props.createPost({ ...this.state, authorName: this.props.username }, this.props.history);
+    if (this.state.file) {
+      uploadImage(this.state.file).then((url) => {
+        // use url for content_url and
+        // either run your createPost actionCreator
+        // or your updatePost actionCreator
+        console.log(url);
+        this.props.createPost({ ...this.state, authorName: this.props.username }, this.props.history);
+      }).catch((error) => {
+        // handle error
+        console.log(error);
+      });
+    }
   }
 
   onDelete = () => {
@@ -66,6 +87,10 @@ class NewPost extends Component {
               aria-label="Tags"
             />
           </InputGroup>
+          <h4>Upload Image</h4>
+          <img id="preview" alt="preview" src={this.state.preview} />
+          <input type="file" name="coverImage" onChange={this.onImageUpload} />
+
           <h4>Content</h4>
           <TextareaAutosize className="input-box"
             placeholder="(Markdown supported)"

@@ -3,7 +3,7 @@ import axios from 'axios';
 // const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://sykesblog.herokuapp.com/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
-const ROOT_URL = 'https://sykes-blog-sa8.herokuapp.com/api';
+export const ROOT_URL = 'https://sykes-blog-sa8.herokuapp.com/api';
 const API_KEY = '?key=chris_sykes';
 
 // keys for actiontypes
