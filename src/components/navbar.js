@@ -8,6 +8,8 @@ import { FaPlusCircle, FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { signoutUser } from '../actions';
 
+import logo from '../assests/noun_feminism_dark_purple.png';
+
 // eslint-disable-next-line react/prefer-stateless-function
 class NavBar extends Component {
   constructor(props) {
@@ -22,7 +24,8 @@ class NavBar extends Component {
   render() {
     return (
       <Navbar className="navBar" variant="light">
-        <Navbar.Brand className="website-title" as={Link} to="/"><img src="./src/img/noun_feminism_dark_purple.png" width="65" height="65" className="d-inline-block align-center" alt="" />
+        <Navbar.Brand className="website-title" as={Link} to="/"><img src={logo} width="65" height="65" className="d-inline-block align-center" alt="logo" />
+          {/* <FaVenus /> */}
           fem·i·nist
         </Navbar.Brand>
         {this.props.authenticated
@@ -30,8 +33,8 @@ class NavBar extends Component {
             <IconContext.Provider value={{ size: '2em' }}>
               <Nav className="ml-auto">
                 <Nav.Link className="navbar-links" onClick={this.onSignOut}>Sign Out</Nav.Link>
-                <Nav.Link as={Link} to="/"><FaBars /></Nav.Link>
-                <Nav.Link as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/"><FaBars /></Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
               </Nav>
             </IconContext.Provider>
           )
@@ -40,7 +43,7 @@ class NavBar extends Component {
               <Nav className="ml-auto">
                 <Nav.Link className="navbar-links" as={Link} to="/signin">Sign In</Nav.Link>
                 <Nav.Link className="navbar-links" as={Link} to="/signup">Sign Up</Nav.Link>
-                <Nav.Link as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
               </Nav>
             </IconContext.Provider>
           )}

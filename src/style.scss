@@ -21,8 +21,21 @@ body, html {
   height: 80px;
 }
 
+.navbar-icon {
+  color: rgb(64, 9, 92) !important;
+}
+
+.navbar-icon:hover {
+  color: rgb(32, 0, 47) !important;
+}
+
 .navbar-links {
+  color: rgb(64, 9, 92) !important;
   margin-top: 5px;
+}
+
+.navbar-links:hover {
+  color: rgb(32, 0, 47) !important;
 }
  
 .website-title {
