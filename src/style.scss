@@ -1,10 +1,10 @@
 body, html {
-    font-family: "Roboto", sans-serif;
-    height: 100%;
+  font-family: 'Special Elite', cursive;
+  height: 100%;
 }
 
 .web-body {
-  background-color: #eeeeee;
+  background-color:  rgb(237, 230, 243);
   min-height: 100vh;
 }
 
@@ -16,6 +16,8 @@ body, html {
 }
 
 .navBar {
+  background-color: rgb(129, 75, 156);
+  font-family: 'Special Elite', cursive;
   height: 80px;
 }
 
@@ -24,10 +26,13 @@ body, html {
 }
  
 .website-title {
-  font-size: 30px;
+  color: rgb(64, 9, 92) !important;
+  text-align: center;
 }
 
 .posts-title {
+  font-family: 'Special Elite', cursive;
+  color: rgb(64, 9, 92);
   margin-top: 25px;
   margin-left: 100px;
 }
@@ -37,15 +42,18 @@ body, html {
 }
 
 .card-body {
-  background-color: #f8f9fa;
+  background-color: rgb(248, 248, 248);
 }
 
-.card-title {
-  color: #1a1a1a;
+.card-title.h5 {
+  color: rgb(64, 9, 92);
+  font-family: 'Special Elite', cursive;
+  font-size: 25px;
 }
 
 .card-text {
-  color: #1a1a1a;
+  color: rgb(64, 9, 92);
+  font-family: 'Special Elite', cursive;
 }
 
 .back-button {
@@ -97,10 +105,17 @@ body, html {
 
 .title {
  font-weight: bold;
+ font-family: 'Special Elite', cursive;
+}
+
+.post-author {
+  font-family: 'Special Elite', cursive;
+
 }
 
 .tags {
   color: #8b8888;
+  font-family: 'Special Elite', cursive;
 }
 
 .navbar-brand {

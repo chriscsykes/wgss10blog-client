@@ -132,7 +132,7 @@ class Post extends Component {
 
   renderAuthor = () => {
     return (
-      <h5>Posted By: {this.props.currentPost.authorName}</h5>
+      <h5 className="post-author">Posted By: {this.props.currentPost.authorName}</h5>
     );
   }
 

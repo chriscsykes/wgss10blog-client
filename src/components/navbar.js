@@ -21,8 +21,10 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar className="navBar" bg="light" variant="light">
-        <Navbar.Brand className="website-title" as={Link} to="/">My Blog</Navbar.Brand>
+      <Navbar className="navBar" variant="light">
+        <Navbar.Brand className="website-title" as={Link} to="/"><img src="./src/img/noun_feminism_dark_purple.png" width="65" height="65" className="d-inline-block align-center" alt="" />
+          fem·i·nist
+        </Navbar.Brand>
         {this.props.authenticated
           ? (
             <IconContext.Provider value={{ size: '2em' }}>
