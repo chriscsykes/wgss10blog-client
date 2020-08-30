@@ -25,7 +25,6 @@ class NavBar extends Component {
     return (
       <Navbar className="navBar" variant="light">
         <Navbar.Brand className="website-title" as={Link} to="/"><img src={logo} width="65" height="65" className="d-inline-block align-center" alt="logo" />
-          {/* <FaVenus /> */}
           fem·i·nist
         </Navbar.Brand>
         {this.props.authenticated
