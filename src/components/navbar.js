@@ -31,18 +31,18 @@ class NavBar extends Component {
           ? (
             <IconContext.Provider value={{ size: '2em' }}>
               <Nav className="ml-auto">
-                <Nav.Link className="navbar-links" onClick={this.onSignOut}>Sign Out</Nav.Link>
-                <Nav.Link className="navbar-icon" as={Link} to="/"><FaBars /></Nav.Link>
-                <Nav.Link className="navbar-icon" as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
+                <Nav.Link className="navbar-links" onClick={this.onSignOut} title="sign out">Sign Out</Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/" title="see all posts"><FaBars /></Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/posts/new" title="create new post"><FaPlusCircle /></Nav.Link>
               </Nav>
             </IconContext.Provider>
           )
           : (
             <IconContext.Provider value={{ size: '2em' }}>
               <Nav className="ml-auto">
-                <Nav.Link className="navbar-links" as={Link} to="/signin">Sign In</Nav.Link>
-                <Nav.Link className="navbar-links" as={Link} to="/signup">Sign Up</Nav.Link>
-                <Nav.Link className="navbar-icon" as={Link} to="/posts/new"><FaPlusCircle /></Nav.Link>
+                <Nav.Link className="navbar-links" as={Link} to="/signin" title="sign in">Sign In</Nav.Link>
+                <Nav.Link className="navbar-links" as={Link} to="/signup" title="sign up">Sign Up</Nav.Link>
+                <Nav.Link className="navbar-icon" as={Link} to="/posts/new" title="create new post"><FaPlusCircle /></Nav.Link>
               </Nav>
             </IconContext.Provider>
           )}
